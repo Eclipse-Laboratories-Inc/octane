@@ -18,11 +18,11 @@ Transaction fees on Solana are very inexpensive, but users still need SOL to pay
 
 Octane provides an API that lets users pay for transactions with SPL token transfers instead of native SOL.
 
-It leverages unique properties of Solana:
+It leverages the unique properties of Solana:
 
 1) Transaction can have multiple signers, one of whom is the transaction fee payer. There is no single "msg.sender".
 
-2) Transaction can have multiple instructions interacting with different programs that are executed atomically. If one instruction fail, whole transactions fails.
+2) Transaction can have multiple instructions interacting with different programs that are executed atomically. If one instruction fails, whole transactions fails.
 
 3) Each instruction refers to accounts it touches as writable or readable. It allows to validate transactions before signing.
 
@@ -52,7 +52,7 @@ You can get started by following the steps in [SETUP](SETUP.md). You'll need to 
 
 ### Using Octane from a client app
 
-If you already have set up an Octane node, or you are using a public endpoint from someone else, it's the time to integrate the node with your client code. Follow [this guide](docs/example-integration.md) to run your first transaction through Octane. You can also view all Octane endpoints and their parameters on [this page](docs/endpoints.md).
+If you already have set up an Octane node, or you are using a public endpoint from someone else, it's time to integrate the node with your client code. Follow [this guide](docs/example-integration.md) to run your first transaction through Octane. You can also view all Octane endpoints and their parameters on [this page](docs/endpoints.md).
 
 ### Integrate it as a Node.js library
 
@@ -84,7 +84,7 @@ Learn more about these use cases in [Recipes](docs/recipes.md).
 
 Octane operates trustlessly and is designed to be easily run by anyone in an adversarial environment.
 
-It uses ratelimiting, transaction validation, and transaction simulation to mitigate DoS, spam, draining, and other attacks.
+It uses rate limiting, transaction validation, and transaction simulation to mitigate DoS, spam, draining, and other attacks.
 
 However, there are some risks associated with running an Octane node:
 
@@ -99,7 +99,7 @@ Follow these recommendations to minimize risks:
 5. Regularly check that prices and liquidity of SPL tokens allow your profitably pay for transaction fees in SOL.
 6. If your Octane node makes profit, regularly withdraw that profit to another keypair.
 7. When using Octane as a library in your backend, make sure to:
-    1. Never return fee payer's signature of an unconfirmed transaction to a user. You must submit transaction to the network from the backend.
+    1. Never return the fee payer's signature of an unconfirmed transaction to a user. You must submit transaction to the network from the backend.
     2. Implement duplicated transaction checks, limits per user and general rate limits.
 
 ## Contributing

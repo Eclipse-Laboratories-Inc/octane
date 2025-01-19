@@ -21,7 +21,7 @@ const simpleTransactionFee = response.endpoints.transfer.tokens[0].fee;
 
 Before we can proceed, we'll need some additional information about the user:
 ```javascript
-// `publicKey` should be loaded from wallet adapter
+// `publicKey` should be loaded from the wallet adapter
 const userTokenAccount = await getAssociatedTokenAddress(mint, publicKey);
 
 // Let's say we want to send a gasless transfer to this public key
@@ -31,8 +31,8 @@ const targetAccount = await getAssociatedTokenAddress(mint, targetOwner);
 
 Now, we're ready to create the transaction with two instructions:
 
-1. Send token fee to Octane's account
-2. Send token transfer to any public key (but this transaction could be anything else)
+1. Send the token fee to Octane's account
+2. Send the token transfer to any public key (but this transaction could be anything else)
 
 We also should set feePayer and recentBlockhash, and then sign the transaction using the end user wallet.
 
@@ -49,9 +49,9 @@ await signTransaction(transaction);
 
 ## Submit transaction
 
-Now, we have the transaction with end user's signature. However, the transaction lacks signature of fee payer.
+Now, we have the transaction with end user's signature. However, the transaction lacks the signature of fee payer.
 
-We need to call an Octane HTTP endpoint to get transaction signed and submitted to the network:
+We need to call an Octane HTTP endpoint to get the transaction signed and submitted to the network:
 
 ```javascript
 const octaneResponse = (await axios.post('https://octane-mainnet-beta.breakroom.show/api/transfer', {

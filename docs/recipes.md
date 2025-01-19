@@ -4,9 +4,9 @@ If you are considering integrating with Octane, this page will provide examples 
 
 ## Transaction fees in SPL tokens
 
-In its simplest form, Octane allows to submit transactions in client-side code without paying transaction fees in SOL in exchange for an equivalent payment in liquid SPL tokens. For example, a client pays 0.001 USDC to Octane node and submits transaction with fee payer equal to Octane address.
+In its simplest form, Octane allows to submit transactions in client-side code without paying transaction fees in SOL in exchange for an equivalent payment in liquid SPL tokens. For example, a client pays 0.001 USDC to Octane node and submits a transaction with a fee payer equal to the Octane address.
 
-To do that, you need form a transaction in your client code (whether it's a mobile or web app) with token transfer to Octane as first instruction and any other instructions ("payload"). Then, you need to call Octane node's `/api/transfer` endpoint with serialized transaction. The endpoint will sign transaction on Octane's behalf and submit it to the network.
+To do that, you need to form a transaction in your client code (whether it's a mobile or web app) with token transfer to Octane as first instruction and any other instructions ("payload"). Then, you need to call Octane node's `/api/transfer` endpoint with serialized transaction. The endpoint will sign transaction on Octane's behalf and submit it to the network.
 
 Octane's configuration with fee payer public key and fee amount for your operations can be loaded by calling `/api` endpoint.
 
@@ -44,7 +44,7 @@ Also, you have to set checks on token emission using ReCaptcha, auth or whitelis
 
 Octane generally doesn't support creating accounts in transaction instructions. However, there is a separate endpoint to create an associated token account for any owner and mint without spending SOL.
 
-When implementing SPL token transfers, if transfer sender doesn't have SOL and transfer recipient doesn't have associated token account, use `/api/createAssociatedTokenAccount` Octane endpoint prior to sending the actual transfer transaction using `/api/transfer`.
+When implementing SPL token transfers, if transfer sender doesn't have SOL and transfer recipient doesn't have an associated token account, use `/api/createAssociatedTokenAccount` Octane endpoint prior to sending the actual transfer transaction using `/api/transfer`.
 
 This endpoint accepts a transaction with two instructions:
 * First instruction should transfer a fee to Octane (this fee is higher than normal, since Octane pays for rent-exemption minimum)
@@ -124,4 +124,4 @@ _Examples:_
 You shouldn't use Octane when you want to run transactions that do not require end user's signature. For example, token airdrops do not require recipient's signature. You can run them without Octane.
 
 
-You shouldn't fully sponsor transactions for unauthorized users (or when authorization process is easy to automate) or without setting strict limits on amount of transactions.
+You shouldn't fully sponsor transactions for unauthorized users (or when the authorization process is easy to automate) or without setting strict limits on amount of transactions.

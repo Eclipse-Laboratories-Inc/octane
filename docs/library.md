@@ -23,7 +23,7 @@ You can call them from your backend endpoints when your use case fits in the Oct
 
 #### signWithTokenFee
 
-Sign transaction by fee payer if the first instruction of transaction is a transfer of token fee and the rest instructions do not interact with fee payer's wallet.
+Sign transaction by fee payer if the first instruction of transaction is a transfer of token fee and the rest of instructions do not interact with fee payer's wallet.
 
 It also implements additional checks: duplicated transactions, fee payer source and failing transactions detection using simulation.
 
@@ -58,13 +58,13 @@ await sendAndConfirmRawTransaction(connection, transaction.serialize(), { commit
 | lamportsPerSignature | number                                     | Maximum transaction fee payment amount in lamports                   |
 | allowedTokens        | core.TokenFee[] from '@solana/octane-core' | List of tokens that can be used for Octane fees with associated info |
 | cache                | Cache from 'cache-manager'                 | A cache to store duplicate transactions                              |
-| sameSourceTimeout    | number                                     | An interval for transactions with same token fee source, ms          |
+| sameSourceTimeout    | number                                     | An interval for transactions with the same token fee source, ms          |
 
 #### createAccountIfTokenFeePaid
 
 Signs transaction by fee payer if both statements are true:
 
-a) the first instruction is a transfer of token fee to given account
+a) the first instruction is a transfer of token fee to a given account
 
 b) the second instruction creates an associated token account with initialization fees paid by fee payer.
 
@@ -112,7 +112,7 @@ Creates a non-signed transaction with Whirlpools swap from one SPL token to unwr
 
 The transaction has to be signed using `signGeneratedTransaction`. If you want full protection against failed transaction spend, you have to sign after receiving user's signature.
 
-`messageToken` has to be passed to `signGeneratedTransaction` to verify that transaction hasn't changed since the generation.
+`messageToken` has to be passed to `signGeneratedTransaction` to verify that the transaction hasn't changed since the generation.
 
 Fee has to be paid in swapped token.
 
@@ -148,7 +148,7 @@ const { transaction, quote, messageToken } = await buildWhirlpoolsSwapToSOL(
 
 #### signGeneratedTransaction
 
-Signs previously generated transaction by Octane. The transaction should have user's signature. The authenticity check is provided using `messageToken` argument, which is a signature for transaction's message.
+Signs previously generated transaction by Octane. The transaction should have the user's signature. The authenticity check is provided using `messageToken` argument, which is a signature for transaction's message.
 
 ```javascript
 const { signature } = await signGeneratedTransaction(
@@ -240,7 +240,7 @@ try {
 
 ### Payer utils
 
-When providing gasless transactions for your users, you manage a Solana wallet that accepts tokens and stores SOL for user's transactions. Naturally, amount of SOL decreases and balances of tokens increase. You have to regularly swap tokens for SOL to keep node operational. Additionally, node operators have to create associated token accounts for each token they receive and setup pricing settings for each token individually.
+When providing gasless transactions for your users, you manage a Solana wallet that accepts tokens and stores SOL for user's transactions. Naturally, the amount of SOL decreases and the balances of tokens increase. You have to regularly swap tokens for SOL to keep node operational. Additionally, node operators have to create associated token accounts for each token they receive and setup pricing settings for each token individually.
 
 `PayerUtils` are helper functions to manage your fee payer signing account.
 
